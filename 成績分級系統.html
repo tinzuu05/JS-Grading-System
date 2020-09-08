@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>成績分級系統</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        main {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-color: rgb(107, 52, 73);
+        }
+
+        .wrapper {
+            width: 500px;
+            height: 150px;
+            background-color: pink;
+            display: block;
+        }
+
+        .wrapper h1 {
+            text-align: center;
+        }
+
+        .resultSheet {
+            width: 500px;
+            height: 200px;
+            background-color: rgb(218, 127, 142);
+            font-size: 32px;
+            line-height: 90px;
+            opacity: 0;
+            transition: 0.5s;
+        }
+
+        .resultSheet.active {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div class="wrapper">
+            <h1>成績分級系統</h1>
+            <label for="ipt1">請輸入您的成績: </label>
+            <input id="ipt1" type="text" value=""></br>
+            <button id="submit_btn"> 送出查詢</button>
+        </div>
+
+        <div class="resultSheet">
+            <span>您輸入的成績為:</span> <span id="grade_result"></span><br>
+            <span>您的分級為:</span><span id="level_result"></span>
+        </div>
+    </main>
+
+
+    <script>
+        var ipt1 = document.querySelector("#ipt1")
+        var submit_btn = document.querySelector("#submit_btn")
+        var resultSheet = document.querySelector(".resultSheet")
+        var grade_result = document.querySelector("#grade_result")
+        var level_result = document.querySelector("#level_result")
+
+
+        submit_btn.onclick = function () {
+            var gradeValue = ipt1.value
+
+            if (gradeValue < 0 || gradeValue > 100) {
+                alert("請輸入0-100之間的數字")
+                ipt1.value = null
+            } else {
+                grade_result.innerHTML = gradeValue
+                
+                if (gradeValue < 60) {
+                    level_result.innerHTML = '不及格'
+                } else if (gradeValue <= 69) {
+                    level_result.innerHTML = '丁'
+                } else if (gradeValue <= 79) {
+                    level_result.innerHTML = '丙'
+                } else if (gradeValue <= 89) {
+                    level_result.innerHTML = '乙'
+                } else {
+                    level_result.innerHTML = '甲'
+                }
+            }
+
+
+
+            resultSheet.classList.add('active') 
+        }
+
+
+    </script>
+
+</body>
+
+</html>
